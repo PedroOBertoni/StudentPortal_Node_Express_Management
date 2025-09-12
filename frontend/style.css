@@ -1,3 +1,4 @@
+/* Seu CSS atualizado */
 body {
   font-family: Arial, sans-serif;
   background: #0d0d0d;
@@ -32,6 +33,13 @@ header nav a {
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s ease;
+  padding-bottom: 5px; /* Adicionado para a linha do active */
+}
+
+/* NOVO: Destaque para a página atual na navegação */
+header nav a.active {
+  color: #fff;
+  border-bottom: 2px solid #fff;
 }
 
 /* Home */
@@ -46,12 +54,13 @@ header nav a {
 .home h1 {
   color: #00ff7f;
   margin-bottom: 20px;
+  font-weight: 700; /* Mais destaque */
 }
 
 .home p {
   color: #ccc;
   line-height: 1.6;
-  margin-bottom: 20px;
+  margin-bottom: 30px; /* Aumentado o espaço entre os parágrafos */
 }
 
 /* Cards */
@@ -69,18 +78,20 @@ header nav a {
   padding: 20px;
   width: 300px;
   text-align: center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição mais suave */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* NOVO: Sombra sutil no estado normal */
 }
 
 .card:hover {
   border: 1px solid #00ff7f;
-  transform: translateY(-5px);
-  box-shadow: 0 0 12px rgba(0, 255, 127, 0.3);
+  transform: translateY(-8px); /* Efeito mais pronunciado */
+  box-shadow: 0 8px 20px rgba(0, 255, 127, 0.5); /* Sombra mais intensa */
 }
 
 .card h2 {
   color: #fff;
   margin-bottom: 10px;
+  font-weight: 500; /* Levemente menos negrito que o H1 */
 }
 
 .card p {
@@ -96,15 +107,16 @@ header nav a {
   font-weight: bold;
   border-radius: 8px;
   text-decoration: none;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 255, 127, 0.2); /* NOVO: Sombra no botão */
 }
 
 .card a:hover {
-  background: #00cc66;
+  background: #00e673; /* Cor mais vibrante no hover */
+  box-shadow: 0 4px 12px rgba(0, 255, 127, 0.4); /* Sombra mais intensa no hover */
 }
 
 .card-large {
-  /* Largura de dois cards (300px cada) + o espaço entre eles (20px) */
   width: calc(300px * 2 + 20px);
 }
 
@@ -167,12 +179,14 @@ footer nav {
   background: #1a1a1a;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  flex: 1; /* Adicionado para preencher o espaço restante */
 }
 
 /* Títulos */
 h1 {
   text-align: center;
   color: #00ff7f;
+  font-weight: 700; /* Mais destaque */
 }
 
 h2 {
@@ -180,7 +194,7 @@ h2 {
   color: #ffffff;
   border-bottom: 1px solid #333333;
   padding-bottom: 5px;
-  margin-bottom: 20px; /* espaço extra */
+  margin-bottom: 25px; /* Mais espaço */
 }
 
 /* Inputs e selects */
@@ -228,11 +242,12 @@ button {
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 255, 127, 0.2); /* Sombra no botão */
   position: relative;
 }
 
 button:hover {
-  box-shadow: 0 0 8px rgba(0, 255, 127, 0.3), 0 0 16px rgba(0, 255, 127, 0.2);
+  box-shadow: 0 0 8px rgba(0, 255, 127, 0.4), 0 0 16px rgba(0, 255, 127, 0.3); /* Sombra mais intensa */
   transform: translateY(-2px);
   background: #00e673;
 }
@@ -245,11 +260,18 @@ table {
   background: #0d0d0d;
   border-radius: 8px;
   overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Sombra para destacar a tabela */
+  transition: box-shadow 0.3s ease;
+}
+
+tr:hover {
+  background: #262626;
+  transition: background-color 0.2s ease;
 }
 
 th,
 td {
-  padding: 10px;
+  padding: 12px 10px; /* Mais espaço interno */
   border-bottom: 1px solid #333333;
   text-align: center;
   color: #cccccc;
@@ -258,10 +280,7 @@ td {
 th {
   background: #1a1a1a;
   color: #00ff7f;
-}
-
-tr:hover {
-  background: #262626;
+  font-weight: 500;
 }
 
 /* Mensagens */
@@ -283,92 +302,6 @@ tr:hover {
   background: #cc0000;
   color: #ffffff;
   border: 1px solid #ff4444;
-}
-
-/* Navbar */
-nav {
-  text-align: center;
-  margin: 20px 0;
-}
-
-nav a {
-  color: #00ff7f;
-  text-decoration: none;
-  padding: 10px 20px;
-  border: 1px solid #00ff7f;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-nav a:hover {
-  background: #00ff7f;
-  color: #0d0d0d;
-}
-
-/* Modal */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 1000;
-}
-
-.modal-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #1a1a1a;
-  padding: 30px;
-  border-radius: 12px;
-  width: 400px;
-  max-width: 90%;
-}
-
-.modal-content h3 {
-  color: #00ff7f;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.modal-content input,
-.modal-content select {
-  width: 100%;
-  margin: 10px 0;
-  box-sizing: border-box;
-}
-
-.modal-content button {
-  margin: 10px 5px 0 0;
-}
-
-.busca-form {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin: 20px 0;
-  padding: 0 10px;
-}
-
-/* Campos (select + input) */
-.busca-form select,
-.busca-form input {
-  height: 40px; /* mesma altura que o botão */
-  padding: 0 12px;
-  border-radius: 6px;
-  border: 1px solid #444;
-  background-color: #111;
-  color: #fff;
-  font-size: 14px;
-  flex: 1; /* faz eles crescerem para ocupar espaço */
-}
-
-.busca-form button:hover {
-  box-shadow: 0 0 8px rgba(0, 255, 127, 0.3), 0 0 16px rgba(0, 255, 127, 0.2);
-  transform: translateY(-1px);
 }
 
 /* Formulário de adicionar */
@@ -443,7 +376,7 @@ nav a:hover {
 /* Grid para inputs do relatório */
 .form-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr auto auto; /* dois selects + checkbox + botão */
+  grid-template-columns: 1fr 1fr auto auto;
   gap: 15px;
   align-items: center;
   margin-top: 15px;
@@ -457,5 +390,5 @@ nav a:hover {
 }
 
 .form-grid button {
-  justify-self: end; /* botão sempre alinhado à direita */
+  justify-self: end;
 }

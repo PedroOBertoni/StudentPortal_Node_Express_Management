@@ -25,7 +25,7 @@ async function adicionarAluno() {
   }
 
   try {
-    const response = await fetch('http://localhost:3000/alunos', {
+    const response = await fetch('/api/alunos', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nome, ra, idade, sexo, media })
@@ -55,7 +55,7 @@ function limparFormulario() {
 
 async function carregarAlunos() {
   try {
-    const response = await fetch('http://localhost:3000/alunos');
+    const response = await fetch('/api/alunos');
     alunos = await response.json();
     atualizarTabela();
   } catch (error) {
@@ -119,7 +119,7 @@ async function salvarEdicao() {
   }
 
   try {
-    const response = await fetch(`http://localhost:3000/alunos/${ra}`, {
+    const response = await fetch(`/api/alunos/${ra}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nome, idade, sexo, media })
@@ -142,7 +142,7 @@ async function salvarEdicao() {
 async function excluirAluno(ra) {
   if (confirm('Deseja excluir este aluno?')) {
     try {
-      const response = await fetch(`http://localhost:3000/alunos/${ra}`, {
+      const response = await fetch(`/api/alunos/${ra}`, {
         method: 'DELETE'
       });
       

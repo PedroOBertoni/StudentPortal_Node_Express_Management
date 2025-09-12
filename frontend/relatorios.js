@@ -1,6 +1,6 @@
 async function gerarRelatorioPersonalizado() {
   try {
-    const response = await fetch("http://localhost:3000/alunos");
+    const response = await fetch("/api/alunos");
     let alunos = await response.json();
 
     if (alunos.length === 0) {
