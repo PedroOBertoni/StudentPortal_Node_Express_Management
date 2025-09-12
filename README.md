@@ -1,57 +1,58 @@
 # StudentSystem_NodeJS_Express_PostgreSQL
 
-<p align="center">
-  <img src="images/logo.png" alt="Student System Logo">
-</p>
+Sistema web para o gerenciamento de alunos, com funcionalidades de busca e ordenação para relatórios e análise de dados. Ideal para fins didáticos e de aprendizado prático com Node.js, Express e PostgreSQL.
 
-## Sobre o Projeto
+---
 
-Este projeto é um sistema de gerenciamento de dados de alunos, desenvolvido como parte da disciplina de **Estrutura de Dados II** na **Uni-FACEF**. Ele aplica conceitos de algoritmos de busca e ordenação em uma aplicação prática para gerenciar e visualizar relatórios de alunos.
+## 🎯 Objetivo do Projeto
 
-### Algoritmos Implementados
-* **Busca Sequencial**: Utilizado para pesquisar registros de alunos.
-* **Selection Sort**: Implementado para ordenar a lista de alunos com base em critérios específicos.
+Este projeto foi desenvolvido com o intuito de **consolidar conhecimentos em Estrutura de Dados e algoritmos** — especificamente, **Busca Sequencial** e **Selection Sort** — aplicados em uma aplicação web real. A ideia surgiu como parte das atividades da disciplina **Estrutura de Dados II** na **Uni-FACEF**, com o objetivo de construir um sistema completo de gerenciamento de alunos.
 
-## Tecnologias Utilizadas
+O projeto simula um cenário onde é necessário gerenciar registros de alunos, permitindo consultas, ordenações e a geração de relatórios. Ele serve como uma base sólida para aplicar e entender como algoritmos teóricos podem ser usados em uma solução prática.
 
-* **Backend**: Node.js, Express, CORS, PostgreSQL
-* **Frontend**: HTML5, CSS3, JavaScript
+---
 
-## Funcionalidades
+## 🧩 Funcionalidades
 
-* **CRUD de Alunos**: Adicionar, visualizar, e remover registros de alunos.
-* **Relatórios**: Geração de relatórios organizados e filtráveis.
-* **Ordenação e Filtragem**: Funcionalidades para organizar dados por nome, RA, idade ou média, e filtrar alunos aprovados.
-* **Interface**: Design simples e responsivo.
+- Gerenciamento de **alunos** com cadastro e visualização de registros.
+- Geração de **relatórios** organizados e filtráveis.
+- **Ordenação** dos dados por diferentes campos, como nome, RA, idade e média.
+- **Filtragem** para exibir apenas alunos aprovados.
+- **Integração com banco de dados** usando **PostgreSQL**.
+- Interface simples e responsiva para fácil uso.
 
-## Como Executar o Projeto
+---
 
-### Pré-requisitos
-* Node.js e npm instalados.
-* Servidor PostgreSQL em execução.
+## 🛠️ Tecnologias Utilizadas
 
-### Instalação
+- **Backend**: Node.js, Express, CORS
+- **Banco de Dados**: PostgreSQL
+- **Frontend**: HTML5, CSS3, JavaScript
+
+---
+
+## 🚀 Como Executar o Projeto
 
 1.  Clone o repositório:
     ```bash
     git clone [https://github.com/seu-usuario/StudentSystem_NodeJS_Express_PostgreSQL.git](https://github.com/seu-usuario/StudentSystem_NodeJS_Express_PostgreSQL.git)
     ```
+
 2.  Navegue para o diretório do projeto:
     ```bash
     cd StudentSystem_NodeJS_Express_PostgreSQL
     ```
+
 3.  Instale as dependências:
     ```bash
     npm install
     ```
-4.  Configure a conexão com o banco de dados em um arquivo `.env`.
+
+4.  Configure a conexão com o seu banco de dados PostgreSQL em um arquivo `.env`.
+
 5.  Inicie o servidor backend:
     ```bash
     npm start
     ```
-6.  Abra o arquivo `index.html` em seu navegador.
 
-## Autores
-
-* **Pedro de Oliveira Bertoni** - [@<seu-usuario-github-pedro>]
-* **João Pedro Lourenço Ferreira** - [@<seu-usuario-github-joao>]
+6.  Abra o arquivo `index.html` em seu navegador para acessar a interface do usuário.
