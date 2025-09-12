@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cadastrar Alunos</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">Sistema de Alunos</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="adicionar.html">Cadastrar Alunos</a>
+        <a href="relatorios.html">Relatórios</a>
+      </nav>
+    </header>
+
+    <div class="container">
+      <h1>Cadastrar Aluno</h1>
+
+      <section>
+        <h2>Cadastrar Aluno</h2>
+        <div id="mensagemAdicionar"></div>
+
+        <div class="adicionar-form">
+          <div class="form-row">
+            <input id="nome" placeholder="Nome" maxlength="50" />
+            <input id="ra" placeholder="RA" maxlength="10" />
+            <input
+              id="idade"
+              placeholder="Idade"
+              type="number"
+              min="1"
+              max="999"
+            />
+          </div>
+          <div class="form-row">
+            <select id="sexo">
+              <option value="">Sexo</option>
+              <option value="M">Masculino</option>
+              <option value="F">Feminino</option>
+            </select>
+            <input
+              id="media"
+              placeholder="Média"
+              type="number"
+              step="0.01"
+              min="0"
+              max="10"
+              maxlength="5"
+            />
+            <button onclick="adicionarAluno()">Cadastrar</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="secaoTabela" style="display: none">
+        <h2>Lista de Alunos</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>RA</th>
+              <th>Idade</th>
+              <th>Sexo</th>
+              <th>Média</th>
+              <th>Resultado</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="listaAlunos"></tbody>
+        </table>
+      </section>
+
+      <div id="modalEdicao" class="modal" style="display: none">
+        <div class="modal-content">
+          <h3>Editar Aluno</h3>
+          <div id="mensagemEdicao"></div>
+          <input id="editNome" placeholder="Nome" maxlength="40" />
+          <input id="editRa" placeholder="RA" readonly />
+          <input
+            id="editIdade"
+            placeholder="Idade"
+            type="number"
+            min="1"
+            max="120"
+          />
+          <select id="editSexo">
+            <option value="M">Masculino</option>
+            <option value="F">Feminino</option>
+          </select>
+          <input
+            id="editMedia"
+            placeholder="Média"
+            type="number"
+            step="0.01"
+            min="0"
+            max="10"
+            maxlength="5"
+          />
+          <button onclick="salvarEdicao()">Salvar</button>
+          <button onclick="fecharModal()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <img
+        src="images/unifacef-logo-preto.png"
+        alt="UNIFACEF"
+        class="footer-logo"
+      />
+      <p>
+        Desenvolvido pelos Alunos da Uni-FACEF:
+        <strong>Pedro de Oliveira Bertoni</strong> e
+        <strong>João Pedro Lourenço Ferreira</strong>
+      </p>
+      <p>Trabalho da disciplina <strong>Estrutura de Dados II</strong></p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

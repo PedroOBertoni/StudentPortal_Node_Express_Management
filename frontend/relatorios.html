@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Relatórios de Alunos</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">Sistema de Alunos</div>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="adicionar.html">Cadastrar Alunos</a>
+        <a href="relatorios.html">Relatórios</a>
+      </nav>
+    </header>
+
+    <div class="container">
+      <h1>Relatórios de Alunos</h1>
+
+      <section>
+        <h2>Gerar Relatórios</h2>
+        <div class="relatorio-form">
+          <div class="form-grid">
+            <div class="form-row">
+              <select id="campo">
+                <option value="nome">Nome</option>
+                <option value="ra">RA</option>
+                <option value="idade">Idade</option>
+                <option value="media">Média</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <select id="ordem">
+                <option value="asc">Crescente</option>
+                <option value="desc">Decrescente</option>
+              </select>
+            </div>
+
+            <div class="form-row checkbox-row">
+              <label>
+                <input type="checkbox" id="apenasAprovados" /> Apenas Aprovados
+              </label>
+            </div>
+
+            <div class="form-row">
+              <button onclick="gerarRelatorioPersonalizado()">
+                Gerar Relatório
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="secaoRelatorio" style="display: none">
+        <h2 id="tituloRelatorio">Relatório</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>RA</th>
+              <th>Idade</th>
+              <th>Sexo</th>
+              <th>Média</th>
+              <th>Resultado</th>
+            </tr>
+          </thead>
+          <tbody id="dadosRelatorio"></tbody>
+        </table>
+      </section>
+    </div>
+
+    <footer>
+      <img
+        src="images/unifacef-logo-preto.png"
+        alt="UNIFACEF"
+        class="footer-logo"
+      />
+      <p>
+        Desenvolvido pelos Alunos da Uni-FACEF:
+        <strong>Pedro de Oliveira Bertoni</strong> e
+        <strong>João Pedro Lourenço Ferreira</strong>
+      </p>
+      <p>Trabalho da disciplina <strong>Estrutura de Dados II</strong></p>
+    </footer>
+
+    <script src="relatorios.js"></script>
+  </body>
+</html>
