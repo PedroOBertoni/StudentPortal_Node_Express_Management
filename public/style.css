@@ -66,6 +66,10 @@ header nav a.active {
   font-size: 18px;
 }
 
+.home section {
+  margin-top: 90px;
+}
+
 /* Cards */
 .cards {
   display: flex;
@@ -179,7 +183,7 @@ footer nav {
 /* Container principal */
 .container {
   width: 900px;
-  margin: 40px auto;
+  margin: 60px auto;
   padding: 20px;
   background: #1a1a1a;
   border-radius: 12px;
