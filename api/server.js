@@ -9,10 +9,16 @@ app.use(express.json());
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 });
 
 // Criar tabela se não existir
 async function criarTabela() {
+  if (!process.env.DATABASE_URL) {
+    console.error("❌ DATABASE_URL não configurada!");
+    return;
+  }
+  
   try {
     await pool.query(`
       CREATE TABLE IF NOT EXISTS alunos (
