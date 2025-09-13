@@ -8,25 +8,22 @@ app.use(cors());
 app.use(express.json());
 
 console.log("🔍 Variáveis de banco:");
-console.log("- DB_HOST:", process.env.DB_HOST ? "✅" : "❌");
-console.log("- DB_PORT:", process.env.DB_PORT || "5432 (padrão)");
-console.log("- DB_NAME:", process.env.DB_NAME ? "✅" : "❌");
 console.log("- DB_USER:", process.env.DB_USER ? "✅" : "❌");
 console.log("- DB_PASSWORD:", process.env.DB_PASSWORD ? "✅" : "❌");
 
 const pool = new Pool({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT || 5432,
-  database: process.env.DB_NAME,
+  host: 'ep-late-water-adu0c7kl-pooler.c-2.us-east-1.aws.neon.tech',
+  port: 5432,
+  database: 'neondb',
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+  ssl: { rejectUnauthorized: false }
 });
 
 // Criar tabela se não existir
 async function criarTabela() {
-  if (!process.env.DB_HOST || !process.env.DB_NAME || !process.env.DB_USER || !process.env.DB_PASSWORD) {
-    console.error("❌ Variáveis de banco não configuradas! Servidor funcionando sem banco.");
+  if (!process.env.DB_USER || !process.env.DB_PASSWORD) {
+    console.error("❌ DB_USER ou DB_PASSWORD não configuradas!");
     return;
   }
   
