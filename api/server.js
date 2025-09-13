@@ -14,6 +14,8 @@ const pool = new Pool({
 
 // Criar tabela se não existir
 async function criarTabela() {
+  console.log("🔍 Variáveis disponíveis:", Object.keys(process.env).filter(key => key.includes('DATABASE') || key.includes('POSTGRES')));
+  
   if (!process.env.DATABASE_URL) {
     console.error("❌ DATABASE_URL não configurada!");
     return;
