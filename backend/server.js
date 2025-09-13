@@ -1,4 +1,4 @@
-require('dotenv').config();
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const { Pool } = require("pg");
@@ -9,8 +9,15 @@ app.use(express.json());
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
+  ssl: {
+    require: true,
+    rejectUnauthorized: false,
+  },
 });
+
+pool.connect()
+  .then(() => console.log("✅ Conectado ao banco com sucesso!"))
+  .catch(err => console.error("❌ Erro de conexão:", err));
 
 // Criar tabela se não existir
 async function criarTabela() {
@@ -124,6 +131,4 @@ app.put("/alunos/:ra", async (req, res) => {
   }
 });
 
-app.listen(3000, () =>
-  console.log("🚀 Servidor rodando na porta 3000")
-);
+app.listen(3000, () => console.log("🚀 Servidor rodando na porta 3000"));
