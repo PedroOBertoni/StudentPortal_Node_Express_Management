@@ -9,12 +9,17 @@ app.use(cors());
 app.use(express.json());
 
 // === Banco ===
+console.log("🔍 Variáveis de banco:");
+console.log("- DB_USER:", process.env.DB_USER ? "✅" : "❌");
+console.log("- DB_PASSWORD:", process.env.DB_PASSWORD ? "✅" : "❌");
+
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    require: true,
-    rejectUnauthorized: false,
-  },
+  host: 'ep-late-water-adu0c7kl-pooler.c-2.us-east-1.aws.neon.tech',
+  port: 5432,
+  database: 'neondb',
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  ssl: { rejectUnauthorized: false }
 });
 
 pool.connect()
@@ -23,6 +28,11 @@ pool.connect()
 
 // Criar tabela se não existir
 async function criarTabela() {
+  if (!process.env.DB_USER || !process.env.DB_PASSWORD) {
+    console.error("❌ DB_USER ou DB_PASSWORD não configuradas!");
+    return;
+  }
+  
   try {
     await pool.query(`
       CREATE TABLE IF NOT EXISTS alunos (

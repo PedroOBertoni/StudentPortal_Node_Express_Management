@@ -2,9 +2,9 @@
   "name": "student-system",
   "version": "1.0.0",
   "description": "Sistema de gerenciamento de alunos",
-  "main": "api/server.js",
+  "main": "backend/server.js",
   "scripts": {
-    "start": "NODE_ENV=production node api/server.js"
+    "start": "NODE_ENV=production node backend/server.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
