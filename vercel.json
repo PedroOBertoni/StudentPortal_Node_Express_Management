@@ -1,15 +1,19 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "api/server.ts",
-      "use": "@vercel/node"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ],
-  "routes": [
+  "headers": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/server.ts"
+      "source": "/*",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/html"
+        }
+      ]
     }
   ]
 }
