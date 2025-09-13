@@ -1,18 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/server.ts"
-    },
-    {
       "source": "/(.*)",
       "destination": "/public/$1"
-    }
-  ],
-  "builds": [
-    {
-      "src": "api/server.ts",
-      "use": "@vercel/node"
     }
   ]
 }
