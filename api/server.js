@@ -7,17 +7,26 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+console.log("🔍 Variáveis de banco:");
+console.log("- DB_HOST:", process.env.DB_HOST ? "✅" : "❌");
+console.log("- DB_PORT:", process.env.DB_PORT || "5432 (padrão)");
+console.log("- DB_NAME:", process.env.DB_NAME ? "✅" : "❌");
+console.log("- DB_USER:", process.env.DB_USER ? "✅" : "❌");
+console.log("- DB_PASSWORD:", process.env.DB_PASSWORD ? "✅" : "❌");
+
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT || 5432,
+  database: process.env.DB_NAME,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
   ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 });
 
 // Criar tabela se não existir
 async function criarTabela() {
-  console.log("🔍 Variáveis disponíveis:", Object.keys(process.env).filter(key => key.includes('DATABASE') || key.includes('POSTGRES')));
-  
-  if (!process.env.DATABASE_URL) {
-    console.error("❌ DATABASE_URL não configurada!");
+  if (!process.env.DB_HOST || !process.env.DB_NAME || !process.env.DB_USER || !process.env.DB_PASSWORD) {
+    console.error("❌ Variáveis de banco não configuradas! Servidor funcionando sem banco.");
     return;
   }
   
