@@ -1,6 +1,6 @@
 async function gerarRelatorioPersonalizado() {
   try {
-    const response = await fetch("/api/alunos");
+    const response = await fetch("https://portalalunobackend.up.railway.app/alunos");
     let alunos = await response.json();
 
     if (alunos.length === 0) {
