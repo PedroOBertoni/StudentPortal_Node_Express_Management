@@ -1,12 +1,14 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 const { Pool } = require("pg");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+// === Banco ===
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
@@ -37,27 +39,20 @@ async function criarTabela() {
     console.error("❌ Erro ao criar tabela:", err);
   }
 }
-
 criarTabela();
 
-// Busca no banco de dados
-async function buscarAluno(campo, valor) {
-  try {
-    const result = await pool.query(
-      `SELECT * FROM alunos WHERE ${campo} = $1`,
-      [valor]
-    );
-    return result.rows[0] || null;
-  } catch (err) {
-    console.error("Erro na busca:", err);
-    return null;
-  }
-}
+// === Servir arquivos estáticos (HTML/CSS/JS) ===
+// Supondo que seu index.html está na pasta "public"
+app.use(express.static(path.join(__dirname, "public")));
 
-// Rotas
+// Rota raiz -> envia index.html
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
+// === Rotas API ===
 app.post("/alunos", async (req, res) => {
   const { nome, ra, idade, sexo, media } = req.body;
-
   try {
     await pool.query(
       "INSERT INTO alunos (nome, ra, idade, sexo, media) VALUES ($1, $2, $3, $4, $5)",
@@ -66,9 +61,7 @@ app.post("/alunos", async (req, res) => {
     res.json({ message: "✅ Aluno adicionado com sucesso!" });
   } catch (err) {
     if (err.code === "23505") {
-      res.status(400).json({
-        message: "❌ Já existe um aluno com este RA!",
-      });
+      res.status(400).json({ message: "❌ Já existe um aluno com este RA!" });
     } else {
       res.status(500).json({ message: "❌ Erro interno do servidor" });
     }
@@ -96,11 +89,18 @@ app.delete("/alunos/:ra", async (req, res) => {
 
 app.post("/buscar", async (req, res) => {
   const { campo, valor } = req.body;
-  const resultado = await buscarAluno(campo, valor);
-  if (resultado) {
-    res.json(resultado);
-  } else {
-    res.status(404).json({ message: "Aluno não encontrado!" });
+  try {
+    const result = await pool.query(
+      `SELECT * FROM alunos WHERE ${campo} = $1`,
+      [valor]
+    );
+    if (result.rows[0]) {
+      res.json(result.rows[0]);
+    } else {
+      res.status(404).json({ message: "Aluno não encontrado!" });
+    }
+  } catch (err) {
+    res.status(500).json({ message: "❌ Erro na busca" });
   }
 });
 
@@ -131,4 +131,6 @@ app.put("/alunos/:ra", async (req, res) => {
   }
 });
 
-app.listen(3000, () => console.log("🚀 Servidor rodando na porta 3000"));
+// === Start server ===
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`🚀 Servidor rodando na porta ${PORT}`));
