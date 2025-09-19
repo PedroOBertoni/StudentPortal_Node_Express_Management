@@ -1,6 +1,6 @@
 let alunos = [];
 
-async function adicionarAluno() {
+function adicionarAluno() {
   const nome = document.getElementById('nome').value.trim();
   const ra = document.getElementById('ra').value.trim();
   const idade = parseInt(document.getElementById('idade').value);
@@ -11,38 +11,19 @@ async function adicionarAluno() {
     mostrarMensagem('Preencha todos os campos!', 'erro', 'mensagemAdicionar');
     return;
   }
-  if (!nome || !ra || !idade || !sexo || isNaN(media)) {
-    mostrarMensagem('Preencha todos os campos!', 'erro', 'mensagemAdicionar');
-    return;
-  }
   if (media < 0 || media > 10) {
     mostrarMensagem('Média inválida! A média deve ser entre 0 e 10', 'erro', 'mensagemAdicionar');
     return;
   }
-  if (alunos.some(aluno => aluno.ra === ra)) {
+  if (buscaSequencial('ra', ra)) {
     mostrarMensagem('RA já cadastrado!', 'erro', 'mensagemAdicionar');
     return;
   }
 
-  try {
-    const response = await fetch('https://portalalunobackend.up.railway.app/alunos', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nome, ra, idade, sexo, media })
-    });
-    
-    const data = await response.json();
-    
-    if (response.ok) {
-      mostrarMensagem(data.message, 'sucesso', 'mensagemAdicionar');
-      limparFormulario();
-      carregarAlunos();
-    } else {
-      mostrarMensagem(data.message, 'erro', 'mensagemAdicionar');
-    }
-  } catch (error) {
-    mostrarMensagem('Erro ao conectar com o servidor!', 'erro', 'mensagemAdicionar');
-  }
+  alunos.push({ nome, ra, idade, sexo, media });
+  mostrarMensagem('✅ Aluno adicionado com sucesso!', 'sucesso', 'mensagemAdicionar');
+  limparFormulario();
+  atualizarTabela();
 }
 
 function limparFormulario() {
@@ -53,14 +34,14 @@ function limparFormulario() {
   document.getElementById('media').value = '';
 }
 
-async function carregarAlunos() {
-  try {
-    const response = await fetch('https://portalalunobackend.up.railway.app/alunos');
-    alunos = await response.json();
-    atualizarTabela();
-  } catch (error) {
-    console.error('Erro ao carregar alunos:', error);
+// Busca Sequencial - algoritmo implementado
+function buscaSequencial(campo, valor) {
+  for (let i = 0; i < alunos.length; i++) {
+    if (alunos[i][campo] === valor) {
+      return alunos[i];
+    }
   }
+  return null;
 }
 
 function atualizarTabela() {
@@ -106,7 +87,7 @@ function editarAluno(ra) {
   document.getElementById('modalEdicao').dataset.ra = ra;
 }
 
-async function salvarEdicao() {
+function salvarEdicao() {
   const ra = document.getElementById('modalEdicao').dataset.ra;
   const nome = document.getElementById('editNome').value.trim();
   const idade = parseInt(document.getElementById('editIdade').value);
@@ -118,44 +99,26 @@ async function salvarEdicao() {
     return;
   }
 
-  try {
-    const response = await fetch(`https://portalalunobackend.up.railway.app/alunos/${ra}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nome, idade, sexo, media })
-    });
+  const aluno = buscaSequencial('ra', ra);
+  if (aluno) {
+    aluno.nome = nome;
+    aluno.idade = idade;
+    aluno.sexo = sexo;
+    aluno.media = media;
     
-    const data = await response.json();
-    
-    if (response.ok) {
-      fecharModal();
-      carregarAlunos();
-      mostrarMensagem(data.message, 'sucesso', 'mensagemAdicionar');
-    } else {
-      mostrarMensagem(data.message, 'erro', 'mensagemEdicao');
-    }
-  } catch (error) {
-    mostrarMensagem('Erro ao conectar com o servidor!', 'erro', 'mensagemEdicao');
+    fecharModal();
+    atualizarTabela();
+    mostrarMensagem('✅ Aluno atualizado com sucesso!', 'sucesso', 'mensagemAdicionar');
   }
 }
 
-async function excluirAluno(ra) {
+function excluirAluno(ra) {
   if (confirm('Deseja excluir este aluno?')) {
-    try {
-      const response = await fetch(`https://portalalunobackend.up.railway.app/alunos/${ra}`, {
-        method: 'DELETE'
-      });
-      
-      const data = await response.json();
-      
-      if (response.ok) {
-        carregarAlunos();
-        mostrarMensagem(data.message, 'sucesso', 'mensagemAdicionar');
-      } else {
-        mostrarMensagem(data.message, 'erro', 'mensagemAdicionar');
-      }
-    } catch (error) {
-      mostrarMensagem('Erro ao conectar com o servidor!', 'erro', 'mensagemAdicionar');
+    const index = alunos.findIndex(aluno => aluno.ra === ra);
+    if (index !== -1) {
+      alunos.splice(index, 1);
+      atualizarTabela();
+      mostrarMensagem('Aluno removido!', 'sucesso', 'mensagemAdicionar');
     }
   }
 }
@@ -171,7 +134,7 @@ function mostrarMensagem(texto, tipo, elementoId) {
   setTimeout(() => elemento.innerHTML = '', 3000);
 }
 
-// Carregar dados ao iniciar
+// Inicializar tabela vazia
 window.onload = function() {
-  carregarAlunos();
+  atualizarTabela();
 };

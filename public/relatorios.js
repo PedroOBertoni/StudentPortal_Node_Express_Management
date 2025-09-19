@@ -1,33 +1,32 @@
-async function gerarRelatorioPersonalizado() {
-  try {
-    const response = await fetch("https://portalalunobackend.up.railway.app/alunos");
-    let alunos = await response.json();
-
-    if (alunos.length === 0) {
-      return;
-    }
-
-    const campo = document.getElementById("campo").value;
-    const ordem = document.getElementById("ordem").value;
-    const apenasAprovados = document.getElementById("apenasAprovados").checked;
-
-    if (apenasAprovados) {
-      alunos = alunos.filter((aluno) => parseFloat(aluno.media) >= 6.0);
-    }
-
-    const alunosOrdenados = selectionSort([...alunos], campo, ordem);
-    const titulo = `Alunos por ${campo.toUpperCase()} (${
-      ordem === "asc" ? "Crescente" : "Decrescente"
-    })${apenasAprovados ? " - Apenas Aprovados" : ""}`;
-
-    if (alunosOrdenados.length === 0) {
-      return;
-    }
-
-    exibirRelatorio(alunosOrdenados, titulo);
-  } catch (error) {
-    console.error("Erro ao carregar dados do servidor:", error);
+function gerarRelatorioPersonalizado() {
+  // Buscar alunos do array global (definido em script.js)
+  if (typeof alunos === 'undefined' || alunos.length === 0) {
+    alert('Nenhum aluno cadastrado!');
+    return;
   }
+
+  const campo = document.getElementById("campo").value;
+  const ordem = document.getElementById("ordem").value;
+  const apenasAprovados = document.getElementById("apenasAprovados").checked;
+
+  let alunosFiltrados = [...alunos];
+  
+  if (apenasAprovados) {
+    alunosFiltrados = alunosFiltrados.filter((aluno) => parseFloat(aluno.media) >= 6.0);
+  }
+
+  if (alunosFiltrados.length === 0) {
+    alert('Nenhum aluno encontrado com os filtros aplicados!');
+    return;
+  }
+
+  // Aplicar Selection Sort
+  const alunosOrdenados = selectionSort(alunosFiltrados, campo, ordem);
+  const titulo = `Alunos por ${campo.toUpperCase()} (${
+    ordem === "asc" ? "Crescente" : "Decrescente"
+  })${apenasAprovados ? " - Apenas Aprovados" : ""}`;
+
+  exibirRelatorio(alunosOrdenados, titulo);
 }
 
 function selectionSort(arr, campo, ordem) {
