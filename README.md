@@ -1,58 +1,67 @@
-# StudentSystem_NodeJS_Express_PostgreSQL
+# Sistema de Gerenciamento de Alunos
 
-Sistema web para o gerenciamento de alunos, com funcionalidades de busca e ordenação para relatórios e análise de dados. Ideal para fins didáticos e de aprendizado prático com Node.js, Express e PostgreSQL.
+Sistema web frontend para gerenciamento de alunos com funcionalidades de cadastro, edição, exclusão e geração de relatórios. Desenvolvido para consolidar conhecimentos em **Estrutura de Dados** e **Algoritmos de Ordenação**.
 
 ---
 
 ## 🎯 Objetivo do Projeto
 
-Este projeto foi desenvolvido com o intuito de **consolidar conhecimentos em Estrutura de Dados e algoritmos** — especificamente, **Busca Sequencial** e **Selection Sort** — aplicados em uma aplicação web real. A ideia surgiu como parte das atividades da disciplina **Estrutura de Dados II** na **Uni-FACEF**, com o objetivo de construir um sistema completo de gerenciamento de alunos.
+Este projeto foi desenvolvido como parte das atividades da disciplina **Estrutura de Dados II** na **Uni-FACEF**, com o objetivo de aplicar algoritmos clássicos em uma aplicação web prática:
 
-O projeto simula um cenário onde é necessário gerenciar registros de alunos, permitindo consultas, ordenações e a geração de relatórios. Ele serve como uma base sólida para aplicar e entender como algoritmos teóricos podem ser usados em uma solução prática.
+- **Busca Sequencial**: Para localização de registros de alunos
+- **Selection Sort**: Para ordenação de dados nos relatórios
+- **Persistência Local**: Usando localStorage para manter dados entre sessões
 
 ---
 
 ## 🧩 Funcionalidades
 
-- Gerenciamento de **alunos** com cadastro e visualização de registros.
-- Geração de **relatórios** organizados e filtráveis.
-- **Ordenação** dos dados por diferentes campos, como nome, RA, idade e média.
-- **Filtragem** para exibir apenas alunos aprovados.
-- **Integração com banco de dados** usando **PostgreSQL**.
-- Interface simples e responsiva para fácil uso.
+- ✅ **Cadastro de Alunos**: Adicionar novos alunos com validação de dados
+- ✅ **Edição Completa**: Modificar todos os campos incluindo RA
+- ✅ **Exclusão Direta**: Remover alunos sem confirmação
+- ✅ **Relatórios Personalizados**: Ordenação por nome, RA, idade ou média
+- ✅ **Filtros Avançados**: Exibir apenas alunos aprovados
+- ✅ **Persistência Local**: Dados mantidos entre sessões do navegador
+- ✅ **Interface Responsiva**: Design moderno com tema escuro
 
 ---
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **Backend**: Node.js, Express, CORS
-- **Banco de Dados**: PostgreSQL
-- **Frontend**: HTML5, CSS3, JavaScript
+### **Frontend**
+- **HTML5**: Estruturação das páginas, formulários e tabelas
+- **CSS3**: Estilização com Flexbox, Grid, animações e tema escuro
+- **JavaScript ES6+**: Lógica de negócio, manipulação DOM e algoritmos
+
+### **Persistência**
+- **LocalStorage**: Armazenamento local dos dados no navegador
+- **JSON**: Serialização/deserialização de dados
+
+### **Algoritmos Implementados**
+- **Busca Sequencial**: Localização de alunos por RA
+- **Selection Sort**: Ordenação de relatórios por diferentes campos
+
+### **Arquitetura**
+- **Frontend Only**: Aplicação totalmente client-side
+- **SPA Simples**: Navegação entre páginas HTML
+- **Modular**: Separação clara entre cadastro e relatórios
 
 ---
 
 ## 🚀 Como Executar o Projeto
 
-1.  Clone o repositório:
-    ```bash
-    git clone [https://github.com/seu-usuario/StudentSystem_NodeJS_Express_PostgreSQL.git](https://github.com/seu-usuario/StudentSystem_NodeJS_Express_PostgreSQL.git)
-    ```
+1. **Clone o repositório**:
+   ```bash
+   git clone https://github.com/PedroOBertoni/StudentPortal_Node_Express_Management.git
+   ```
 
-2.  Navegue para o diretório do projeto:
-    ```bash
-    cd StudentSystem_NodeJS_Express_PostgreSQL
-    ```
+2. **Navegue para o diretório**:
+   ```bash
+   cd StudentPortal_Node_Express_Management
+   ```
 
-3.  Instale as dependências:
-    ```bash
-    npm install
-    ```
+3. **Abra no navegador**:
+   - Abra o arquivo `public/index.html` diretamente no navegador
+   - Ou use um servidor local como Live Server (VS Code)
 
-4.  Configure a conexão com o seu banco de dados PostgreSQL em um arquivo `.env`.
-
-5.  Inicie o servidor backend:
-    ```bash
-    npm start
-    ```
-
-6.  Abra o arquivo `index.html` em seu navegador para acessar a interface do usuário.
+**Não há necessidade de instalação de dependências ou configuração!**
